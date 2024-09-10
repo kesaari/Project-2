@@ -1,7 +1,7 @@
 
-let dialog = document.querySelector("dialog");
+let dialog       = document.querySelector("dialog");
 let modalOverlay = document.querySelector('.modal__overlay')
-let modalClose = document.querySelector('.modal__close')
+let modalClose   = document.querySelector('.modal__close')
 
 let btnArray = document.querySelectorAll('[type="button"]');
 btnArray.forEach(function(btn) {
@@ -22,21 +22,21 @@ modalOverlay.addEventListener('click', function() {
 })
 
 
-let menuBtn = document.querySelector('.navigation__menu');
-let submenu = document.querySelector('menu');
+let menuBtn  = document.querySelector('.navigation__menu');
+let submenu  = document.querySelector('menu');
 let closeBtn = document.querySelector('.close')
-let overlay = document.querySelector('.overlay')
-let elMenu = document.querySelector('.navigation__menu-3')
+let overlay  = document.querySelector('.overlay')
+let elMenu   = document.querySelector('.navigation__menu-3')
 let menuShow = false;
 
 menuBtn.addEventListener('click', function() {
   if (menuShow == false) { 
     submenu.style.display = "block";
-    menuShow = true;
+    menuShow              = true;
     elMenu.classList.add('navigation__menu-3-active');
 } else {
   submenu.style.display = "none";
-  menuShow = false;
+  menuShow              = false;
   elMenu.classList.remove('navigation__menu-3-active');
 }
 });
@@ -44,19 +44,19 @@ menuBtn.addEventListener('click', function() {
 submenu.addEventListener("click",function(e) {
   if((e.target) && (e.target.nodeName == "LI" || e.target.nodeName == "A")) {
     submenu.style.display = "none";
-    menuShow = false;
+    menuShow              = false;
     elMenu.classList.remove('navigation__menu-3-active');
   }
 });
 
 closeBtn.addEventListener('click', function() {
     submenu.style.display = "none";
-    menuShow = false;
+    menuShow              = false;
     elMenu.classList.remove('navigation__menu-3-active');
 });
 overlay.addEventListener('click', function() {
   submenu.style.display = "none";
-  menuShow = false;
+  menuShow              = false;
   elMenu.classList.remove('navigation__menu-3-active');
 });
 
@@ -64,21 +64,21 @@ overlay.addEventListener('click', function() {
 document.addEventListener('keydown', function (evt) {
     if (evt.keyCode === 27) {
         submenu.style.display = "none";
-        menuShow = false;
+        menuShow              = false;
         dialog.close();
         modalOverlay.style.display = "none";
         elMenu.classList.remove('navigation__menu-3-active');
     }});
 
-    let upSwiper = null;
+    let upSwiper   = null;
     let downSwiper = null;
 
     function upSliderStart() {
        if (!upSwiper) {
         upSwiper = new Swiper('.swiper', {
           pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
+            el               : '.swiper-pagination',
+            clickable        : true,
             sliderCardPerView: 'auto',
           } 
         });
@@ -92,8 +92,8 @@ document.addEventListener('keydown', function (evt) {
       if (!downSwiper) {
         downSwiper = new Swiper('.swiper-2', {
          pagination: {
-           el: '.swiper-pagination',
-           clickable: true,
+           el               : '.swiper-pagination',
+           clickable        : true,
            sliderCardPerView: 'auto',
          } 
        });
@@ -119,21 +119,9 @@ document.addEventListener('keydown', function (evt) {
       }
     });
 
-    let seeMore = document.querySelector('.see-more');
+    let seeMore         = document.querySelector('.see-more');
     let sliderCardArray = document.querySelectorAll('.profit-card-item');
-    let cardShow = false;
-
-  //   sliderCardArray.forEach(function(item) {
-  //     seeMore.addEventListener('click', function() {
-  //       if (item.style.display == "none") {
-  //       item.style.display = "block";
-        
-  //       } else {
-  //       item.style.display = "none";
-
-  //       }
-  //     });
-  // });
+    let cardShow        = false;
     
 
   seeMore.addEventListener('click', function() {
@@ -159,3 +147,31 @@ document.addEventListener('keydown', function (evt) {
 
     }
   });
+
+
+
+
+
+  function incrementCounter(counterName){
+    
+    let counters;
+  
+    try {
+        counters = JSON.parse(localStorage.getItem("counters"));
+    } catch (er) {
+        counters = {};
+    }
+  
+    if (!counters) {
+        counters = {};
+        counters[counterName] = 0;
+    }
+    if (!counters[counterName]) {
+      counters[counterName] = 0;
+    }
+
+    counters[counterName]++;
+    localStorage.setItem("counters", JSON.stringify(counters));
+  
+    return counters[counterName];
+  }
